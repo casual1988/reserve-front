@@ -3,6 +3,10 @@ npx create-react-app my-app
 cd my-app
 npm start
 
+instalirati i material
+npm install @material-ui/core
+npm install @material-ui/icons
+
 kreirajte novi projekat sa ovim gore komandama i onda iz njega kopirajte node_module i ubacite ga u svoj workspace u my-app folder
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
