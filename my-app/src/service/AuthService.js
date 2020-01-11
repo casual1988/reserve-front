@@ -1,29 +1,25 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = 'http://localhost:8080/users';
+const USER_API_BASE_URL = 'http://localhost:8080/token/';
 
-class ApiService {
+class AuthService {
 
-    fetchUsers() {
-        return axios.get(USER_API_BASE_URL);
+    login(credentials){
+        return axios.post(USER_API_BASE_URL + "generate-token", credentials);
     }
 
-    fetchUserById(userId) {
-        return axios.get(USER_API_BASE_URL + '/' + userId);
+    getUserInfo(){
+        return JSON.parse(localStorage.getItem("userInfo"));
     }
 
-    deleteUser(userId) {
-        return axios.delete(USER_API_BASE_URL + '/' + userId);
+    getAuthHeader() {
+        return {headers: {Authorization: 'Bearer ' + this.getUserInfo().token }};
     }
 
-    addUser(user) {
-        return axios.post(""+USER_API_BASE_URL, user);
+    logOut() {
+        localStorage.removeItem("userInfo");
+        return axios.post(USER_API_BASE_URL + 'logout', {}, this.getAuthHeader());
     }
-
-    editUser(user) {
-        return axios.put(USER_API_BASE_URL + '/' + user.id, user);
-    }
-
 }
 
-export default new ApiService();
+export default new AuthService();

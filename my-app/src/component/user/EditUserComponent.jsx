@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import ApiService from "../../service/ApiService";
+import UserService from "../../service/UserService";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import NavBar from "../Navbar";
 
 class EditUserComponent extends Component {
 
@@ -7,6 +12,7 @@ class EditUserComponent extends Component {
         super(props);
         this.state ={
             id: '',
+            username: '',
             firstName: '',
             lastName: '',
             age: '',
@@ -21,7 +27,7 @@ class EditUserComponent extends Component {
     }
 
     loadUser() {
-        ApiService.fetchUserById(window.localStorage.getItem("userId"))
+        UserService.fetchUserById(window.localStorage.getItem("userId"))
             .then((res) => {
                 let user = res.data.result;
                 this.setState({
@@ -41,49 +47,43 @@ class EditUserComponent extends Component {
     saveUser = (e) => {
         e.preventDefault();
         let user = {id: this.state.id, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
-        ApiService.editUser(user)
+        UserService.editUser(user)
             .then(res => {
                 this.setState({message : 'User added successfully.'});
-                this.props.history.push('/users');
+                this.props.history.push('/list-user');
             });
     }
 
     render() {
         return (
-            <div>
-                <h2 className="text-center">Edit User</h2>
-                <form>
+            <React.Fragment>
+                <NavBar/>
+                <Container>
+                    <Typography variant="h4" style={style}>Edit User</Typography>
+                    <form>
 
-                    <div className="form-group">
-                        <label>User Name:</label>
-                        <input type="text" placeholder="username" name="username" className="form-control" readonly="true" defaultValue={this.state.username}/>
-                    </div>
+                        <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} disabled/>
 
-                    <div className="form-group">
-                        <label>First Name:</label>
-                        <input placeholder="First Name" name="firstName" className="form-control" value={this.state.firstName} onChange={this.onChange}/>
-                    </div>
+                        <TextField label="FIRST NAME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
-                    <div className="form-group">
-                        <label>Last Name:</label>
-                        <input placeholder="Last name" name="lastName" className="form-control" value={this.state.lastName} onChange={this.onChange}/>
-                    </div>
+                        <TextField label="LAST NAME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
-                    <div className="form-group">
-                        <label>Age:</label>
-                        <input type="number" placeholder="age" name="age" className="form-control" value={this.state.age} onChange={this.onChange}/>
-                    </div>
+                        <TextField type="number" label="AGE" fullWidth margin="normal" name="age" value={this.state.age} onChange={this.onChange}/>
 
-                    <div className="form-group">
-                        <label>Salary:</label>
-                        <input type="number" placeholder="salary" name="salary" className="form-control" value={this.state.salary} onChange={this.onChange}/>
-                    </div>
+                        <TextField type="number" label="SALARY" fullWidth margin="normal" name="salary" value={this.state.salary} onChange={this.onChange}/>
 
-                    <button className="btn btn-success" onClick={this.saveUser}>Save</button>
-                </form>
-            </div>
+                        <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
+
+                    </form>
+                </Container>
+            </React.Fragment>
         );
     }
+}
+
+const style ={
+    display: 'flex',
+    justifyContent: 'center'
 }
 
 export default EditUserComponent;
