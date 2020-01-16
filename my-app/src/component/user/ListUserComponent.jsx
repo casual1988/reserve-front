@@ -1,5 +1,16 @@
 import React, { Component } from 'react'
-import ApiService from "../../service/ApiService";
+import UserService from "../../service/UserService";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import NavBar from "../Navbar";
 
 class ListUserComponent extends Component {
 
@@ -9,6 +20,7 @@ class ListUserComponent extends Component {
             users: [],
             message: null
         }
+
         this.deleteUser = this.deleteUser.bind(this);
         this.editUser = this.editUser.bind(this);
         this.addUser = this.addUser.bind(this);
@@ -20,19 +32,18 @@ class ListUserComponent extends Component {
     }
 
     reloadUserList() {
-        ApiService.fetchUsers()
+        UserService.fetchUsers()
             .then((res) => {
                 this.setState({users: res.data.result})
             });
     }
 
     deleteUser(userId) {
-        ApiService.deleteUser(userId)
+        UserService.deleteUser(userId)
            .then(res => {
                this.setState({message : 'User deleted successfully.'});
                this.setState({users: this.state.users.filter(user => user.id !== userId)});
            })
-
     }
 
     editUser(id) {
@@ -47,44 +58,53 @@ class ListUserComponent extends Component {
 
     render() {
         return (
-            <div>
-                <h2 className="text-center">User Details</h2>
-                <button className="btn btn-danger" style={{width:'100px'}} onClick={() => this.addUser()}> Add User</button>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th className="hidden">Id</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>UserName</th>
-                            <th>Age</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.users.map(
-                        user =>
-                                    <tr key={user.id}>
-                                        <td>{user.firstName}</td>
-                                        <td>{user.lastName}</td>
-                                        <td>{user.username}</td>
-                                        <td>{user.age}</td>
-                                        <td>{user.salary}</td>
-                                        <td>
-                                            <button className="btn btn-success" onClick={() => this.deleteUser(user.id)}> Delete</button>
-                                            <button className="btn btn-success" onClick={() => this.editUser(user.id)} style={{marginLeft: '20px'}}> Edit</button>
-                                        </td>
-                                    </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
+            <React.Fragment>
+                <NavBar/>
+                <Container>
+                    <Typography variant="h4" style={style}>User Details</Typography>
+                    <Button variant="contained" color="primary" onClick={() => this.addUser()}>
+                        Add User
+                    </Button>
 
-            </div>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Id</TableCell>
+                                <TableCell>FirstName</TableCell>
+                                <TableCell align="right">LastName</TableCell>
+                                <TableCell align="right">UserName</TableCell>
+                                <TableCell align="right">Age</TableCell>
+                                <TableCell align="right">Salary</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.users.map(row => (
+                                <TableRow key={row.id}>
+                                    <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell>
+                                    <TableCell align="right">{row.firstName}</TableCell>
+                                    <TableCell align="right">{row.lastName}</TableCell>
+                                    <TableCell align="right">{row.username}</TableCell>
+                                    <TableCell align="right">{row.age}</TableCell>
+                                    <TableCell align="right">{row.salary}</TableCell>
+                                    <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
+                                    <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Container>
+            </React.Fragment>
         );
     }
 
+}
+
+const style ={
+    display: 'flex',
+    justifyContent: 'center'
 }
 
 export default ListUserComponent;
