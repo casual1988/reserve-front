@@ -29,7 +29,7 @@ class LoginComponent extends React.Component {
         AuthService.login(credentials).then(res => {
             if(res.data.status === 200){
                 localStorage.setItem("userInfo", JSON.stringify(res.data.result));
-                this.props.history.push('/list-user');
+                this.props.history.push('/list-policy');
             }else {
                 this.setState({message: res.data.message});
             }
@@ -45,7 +45,7 @@ class LoginComponent extends React.Component {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h6">
-                            React User Application
+                            Policy Application
                         </Typography>
                     </Toolbar>
                 </AppBar>

@@ -22,3 +22,36 @@
 .App-link {
   color: #61dafb;
 }
+
+
+.navLinks {
+  background: #333;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+}
+
+.navLinks li {
+  display: inline-block;
+}
+
+.navLinks li a,
+.navLinks li a:active, 
+.navLinks li a:visited {
+  color: #fff;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.navLinks li a.active {
+  color: #999;
+}
+
+.navLinks li a:hover {
+  text-decoration: underline;
+}
+
+.navLinks li a.active:hover {
+  cursor: default;
+  text-decoration: none;
+}

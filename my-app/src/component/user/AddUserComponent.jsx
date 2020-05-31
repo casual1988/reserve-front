@@ -55,7 +55,8 @@ class AddUserComponent extends Component{
 
                         <TextField label="SALARY" type="number" fullWidth margin="normal" name="salary" value={this.state.salary} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
+                        <Button variant="contained" color="primary" onClick={this.saveUser}>Snimi</Button>
+                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
                     </form>
                 </Container>
             </Fragment>
