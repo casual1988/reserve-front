@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthService from './AuthService';
 
-const POLICY_API_BASE_URL = 'http://localhost:8080/policies';
+const POLICY_API_BASE_URL = 'http://185.125.123.102:8282/policies';
 
 class PolicyService {
 
@@ -13,8 +13,8 @@ class PolicyService {
         return axios.get(POLICY_API_BASE_URL + '/' + policyId, AuthService.getAuthHeader());
     }
 
-    fetchPoliciesByUserId(username) {
-        return axios.get(POLICY_API_BASE_URL + '/' + username, AuthService.getAuthHeader());
+    fetchPoliciesByUserId() {
+        return axios.get(POLICY_API_BASE_URL + '/listPolicyByUsername' , AuthService.getAuthHeader());
     }
     deletePolicy(policyId) {
         return axios.delete(POLICY_API_BASE_URL + '/' + policyId, AuthService.getAuthHeader());
