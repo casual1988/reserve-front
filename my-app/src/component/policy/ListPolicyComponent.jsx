@@ -32,7 +32,7 @@ class ListPolicyComponent extends Component {
     }
 
     reloadPolicyList() {
-        PolicyService.fetchPolicies()
+        PolicyService.fetchPoliciesByUserId()
             .then((res) => {
                 this.setState({policies: res.data.result})
             });
@@ -70,12 +70,13 @@ class ListPolicyComponent extends Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
-                                <TableCell align="right">FirstName</TableCell>
-                                <TableCell align="right">LastName</TableCell>
-                                <TableCell align="right">PolicyNumber</TableCell>
-                                <TableCell align="right">Discount</TableCell>
-                                <TableCell align="right">DiscountPercentage</TableCell>
-                                <TableCell align="right">Description</TableCell>
+                                <TableCell align="right">Ime</TableCell>
+                                <TableCell align="right">Prezime</TableCell>
+                                <TableCell align="right">Broj polise</TableCell>
+                                <TableCell align="right">Popust</TableCell>
+                                <TableCell align="right">Popust %</TableCell>
+                                <TableCell align="right">Dodatni opis</TableCell>
+                                <TableCell align="right">Datum unosa</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -90,6 +91,7 @@ class ListPolicyComponent extends Component {
                                     <TableCell align="right">{row.discount}</TableCell>
                                     <TableCell align="right">{row.discountPercentage}</TableCell>
                                     <TableCell align="right">{row.description}</TableCell>
+                                    <TableCell align="right">{row.insertDate}</TableCell>
                                     <TableCell align="right" onClick={() => this.editPolicy(row.id)}><CreateIcon /></TableCell>
                                     <TableCell align="right" onClick={() => this.deletePolicy(row.id)}><DeleteIcon /></TableCell>
 

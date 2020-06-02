@@ -18,7 +18,6 @@ class AddPolicyComponent extends Component{
             lastName: '',
             price: '',
             carType:'',
-            userId: '',
             description:'',
             message: null
         }
@@ -29,7 +28,7 @@ class AddPolicyComponent extends Component{
         e.preventDefault();
         let policy = {policyNumber: this.state.policyNumber, discount: this.state.discount, 
             firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,
-            price: this.state.price, userId: this.state.userId, description: this.state.description, carType: this.state.carType};
+            price: this.state.price,  description: this.state.description, carType: this.state.carType};
         PolicyService.addPolicy(policy)
             .then(res => {
                 this.setState({message : 'Policy added successfully.'});
@@ -48,23 +47,21 @@ class AddPolicyComponent extends Component{
                     <Typography variant="h4" style={style}>Add Policy</Typography>
                     <form style={formContainer}>
 
-                        <TextField label="POLICY NUMBER" fullWidth margin="normal" name="policyNumber" value={this.state.policyNumber} onChange={this.onChange}/>
+                        <TextField label="BROJ POLISE" fullWidth margin="normal" name="policyNumber" value={this.state.policyNumber} onChange={this.onChange}/>
 
-                        <TextField label="DISCOUNT" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
+                        <TextField label="POPUST" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
 
-                        <TextField label="DISCOUNT PERCENTAGE" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
+                        <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
 
-                        <TextField label="FIRST NAME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
+                        <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
-                        <TextField label="LAST NAME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
+                        <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
-                        <TextField label="CAR TYPE" fullWidth margin="normal" name="carType" value={this.state.carType} onChange={this.onChange}/>
+                        <TextField label="TIP VOZILA" fullWidth margin="normal" name="carType" value={this.state.carType} onChange={this.onChange}/>
 
-                        <TextField label="PRICE" type="number" fullWidth margin="normal" name="price" value={this.state.price} onChange={this.onChange}/>
+                        <TextField label="PREMIJA IZNOS KM" type="number" fullWidth margin="normal" name="price" value={this.state.price} onChange={this.onChange}/>
 
-                        <TextField label="USER ID" type="number" fullWidth margin="normal" name="userId" value={this.state.userId} onChange={this.onChange}/>
-
-                        <TextField label="DESCRIPTION" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
+                        <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.savePolicy}>Snimi</Button>
                         <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-policy')}>Odustani</Button>
