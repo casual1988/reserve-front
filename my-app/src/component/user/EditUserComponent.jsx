@@ -15,8 +15,8 @@ class EditUserComponent extends Component {
             username: '',
             firstName: '',
             lastName: '',
-            age: '',
-            salary: '',
+            employeeId: '',
+            contactNumber: '',
         }
         this.saveUser = this.saveUser.bind(this);
         this.loadUser = this.loadUser.bind(this);
@@ -35,8 +35,8 @@ class EditUserComponent extends Component {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                age: user.age,
-                salary: user.salary,
+                employeeId: user.employeeId,
+                contactNumber: user.contactNumber,
                 })
             });
     }
@@ -46,7 +46,7 @@ class EditUserComponent extends Component {
 
     saveUser = (e) => {
         e.preventDefault();
-        let user = {id: this.state.id, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, age: this.state.age, salary: this.state.salary};
+        let user = {id: this.state.id, password: this.state.password, firstName: this.state.firstName, lastName: this.state.lastName, employeeId: this.state.employeeId, contactNumber: this.state.contactNumber};
         UserService.editUser(user)
             .then(res => {
                 this.setState({message : 'User added successfully.'});
@@ -64,13 +64,13 @@ class EditUserComponent extends Component {
 
                         <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} disabled/>
 
-                        <TextField label="FIRST NAME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
+                        <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
-                        <TextField label="LAST NAME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
+                        <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
-                        <TextField type="number" label="AGE" fullWidth margin="normal" name="age" value={this.state.age} onChange={this.onChange}/>
+                        <TextField label="ZASTUPNIK ID" fullWidth margin="normal" name="employeeId" value={this.state.employeeId} onChange={this.onChange}/>
 
-                        <TextField type="number" label="SALARY" fullWidth margin="normal" name="salary" value={this.state.salary} onChange={this.onChange}/>
+                        <TextField label="BROJ TELEFONA" fullWidth margin="normal" name="contactNumber" value={this.state.contactNumber} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
 
