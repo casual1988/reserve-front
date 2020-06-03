@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #8f2086;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,50 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App-AuraCollor{
+  background-color: #8f2086;
+}
 
 .App-link {
   color: #61dafb;
 }
+
+
+.navLinks {
+  background: rgb(255, 255, 255);
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  color: #8f2086;
+}
+
+.navLinks li {
+  display: inline-block;
+}
+
+.navLinks li a,
+.navLinks li a:active, 
+.navLinks li a:visited {
+  color: #8f2086;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: 700;
+    text-transform: uppercase;
+}
+
+.navLinks li a.active {
+  color: #8f2086;
+  font-weight: 700;
+    text-transform: uppercase;
+}
+
+.navLinks li a:hover {
+  text-decoration: underline;
+}
+
+.navLinks li a.active:hover {
+  cursor: default;
+  text-decoration: none;
+}
+
+

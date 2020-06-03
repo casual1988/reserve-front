@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/my-app.rar
+/.gitignore
+/README.md
+/package-lock.json
+/package.json
