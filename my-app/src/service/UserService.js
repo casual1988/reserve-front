@@ -1,11 +1,7 @@
 import axios from 'axios';
 import AuthService from './AuthService';
 
-<<<<<<< HEAD
-const USER_API_BASE_URL = 'http://localhost:8080/users';
-=======
 const USER_API_BASE_URL = 'http://185.125.123.102:8282/users';
->>>>>>> moj_branch
 
 class UserService {
 
