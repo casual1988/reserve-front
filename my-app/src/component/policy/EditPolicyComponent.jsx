@@ -18,7 +18,6 @@ class EditPolicyComponent extends Component {
             firstName: '',
             lastName: '',
             price: '',
-            carType:'',
             description:'',
             message: null
         }
@@ -42,8 +41,7 @@ class EditPolicyComponent extends Component {
                 discount: policy.discount,
                 discountPercentage: policy.discountPercentage,
                 price: policy.price,
-                description: policy.description,
-                carType: policy.carType
+                description: policy.description
                 })
             });
     }
@@ -68,27 +66,25 @@ class EditPolicyComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Edit policy</Typography>
+                    <Typography variant="h4" style={style}>Izmjena Polise</Typography>
                     <form>
 
                     <TextField label="BROJ POLISE" fullWidth margin="normal" name="policyNumber" value={this.state.policyNumber} onChange={this.onChange}/>
-
-                    <TextField label="POPUST" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
-
-                    <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
 
                     <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
                     <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
-                    <TextField label="TIP VOZILA" fullWidth margin="normal" name="carType" value={this.state.carType} onChange={this.onChange}/>
-
                     <TextField label="PREMIJA IZNOS KM" type="number" fullWidth margin="normal" name="price" value={this.state.price} onChange={this.onChange}/>
 
+                    <TextField label="POPUST U KM" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
+
+                    <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
+                  
                     <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.savePolicy}>Save</Button>
-
+                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-policy')}>Odustani</Button>
                     </form>
                 </Container>
             </React.Fragment>
@@ -98,7 +94,8 @@ class EditPolicyComponent extends Component {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default EditPolicyComponent;

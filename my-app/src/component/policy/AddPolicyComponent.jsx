@@ -17,7 +17,6 @@ class AddPolicyComponent extends Component{
             firstName: '',
             lastName: '',
             price: '',
-            carType:'',
             description:'',
             message: null
         }
@@ -28,7 +27,7 @@ class AddPolicyComponent extends Component{
         e.preventDefault();
         let policy = {policyNumber: this.state.policyNumber, discount: this.state.discount, 
             firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,
-            price: this.state.price,  description: this.state.description, carType: this.state.carType};
+            price: this.state.price,  description: this.state.description};
         PolicyService.addPolicy(policy)
             .then(res => {
                 this.setState({message : 'Policy added successfully.'});
@@ -44,23 +43,22 @@ class AddPolicyComponent extends Component{
             <Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Add Policy</Typography>
+                    <Typography variant="h4" style={style}>Dodaj Polisu</Typography>
                     <form style={formContainer}>
 
                         <TextField label="BROJ POLISE" fullWidth margin="normal" name="policyNumber" value={this.state.policyNumber} onChange={this.onChange}/>
-
-                        <TextField label="POPUST" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
-
-                        <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
 
                         <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
                         <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
-                        <TextField label="TIP VOZILA" fullWidth margin="normal" name="carType" value={this.state.carType} onChange={this.onChange}/>
-
                         <TextField label="PREMIJA IZNOS KM" type="number" fullWidth margin="normal" name="price" value={this.state.price} onChange={this.onChange}/>
 
+                        <TextField label="POPUST U KM" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
+
+                        <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
+                     
+                       
                         <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.savePolicy}>Snimi</Button>
@@ -78,8 +76,8 @@ const formContainer = {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default AddPolicyComponent;

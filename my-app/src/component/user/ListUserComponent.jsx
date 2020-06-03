@@ -61,9 +61,9 @@ class ListUserComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>User Details</Typography>
+                    <Typography variant="h4" style={style}>Lista Korisnika</Typography>
                     <Button variant="contained" color="primary" onClick={() => this.addUser()}>
-                        Add User
+                        Dodaj Korisnika
                     </Button>
 
                     <Table>
@@ -102,7 +102,8 @@ class ListUserComponent extends Component {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default ListUserComponent;

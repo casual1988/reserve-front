@@ -14,9 +14,9 @@ const NavBar = () => {
     return (
             <div>
                 <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6" style={style}>
-                            React User Application
+                    <Toolbar className="App-AuraCollor">
+                        <Typography variant="h6" style={style} className="App-AuraCollor">
+                            AURA - Mobile agent
                         </Typography>
                         <Button color="inherit">{AuthService.getUserInfo().username}</Button>
                         <Button color="inherit" component={Link} to="/">Logout</Button>
@@ -25,11 +25,11 @@ const NavBar = () => {
 
         <nav>
             <ul className='navLinks'>
-            <li><Link to="/list-policy">Pocetna</Link></li>
-            <li><Link to="/add-policy">Dodaj policu</Link></li>
+            <li><Link to="/list-policy">Početna</Link></li>
+            <li><Link to="/add-policy">Dodaj polisu</Link></li>
             <li><Link to="/add-user">Dodaj korisnika</Link></li>
             <li><Link to="/list-user">Lista korisnika</Link></li>
-    
+            <li><Link to="/file-download">Export polisa</Link></li>
             </ul>
         </nav>
         </header>

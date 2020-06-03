@@ -7,6 +7,8 @@ import ListPolicyComponent from "./policy/ListPolicyComponent";
 import AddPolicyComponent from "./policy/AddPolicyComponent";
 import EditPolicyComponent from "./policy/EditPolicyComponent";
 
+import FileDownloadComponent from "./policy/FileDownloadComponent";
+
 import React from "react";
 import LoginComponent from "./user/LoginComponent";
 
@@ -22,6 +24,7 @@ const AppRouter = () => {
                         <Route path="/list-policy" component={ListPolicyComponent} />
                         <Route path="/add-policy" component={AddPolicyComponent} />
                         <Route path="/edit-policy" component={EditPolicyComponent} />
+                        <Route path="/file-download" component={FileDownloadComponent} />
                     </Switch>
             </Router>
     )

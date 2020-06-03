@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AuthService from '../../service/AuthService';
+//import logo from './../../logo.svg';
 
 class LoginComponent extends React.Component {
 
@@ -42,22 +43,23 @@ class LoginComponent extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <AppBar position="static">
-                    <Toolbar>
-                        <Typography variant="h6">
-                            Policy Application
+                <AppBar position="static" >
+                
+                    <Toolbar className="App-AuraCollor">
+                        <Typography variant="h6" className="App-AuraCollor">
+                            AURA - Mobile agent
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <Container maxWidth="sm">
-                    <Typography variant="h4" style={styles.center}>Login</Typography>
+                    <Typography variant="h4" style={styles.center}>Prijava</Typography>
                     <form>
                         <Typography variant="h4" style={styles.notification}>{this.state.message}</Typography>
                         <TextField type="text" label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
 
                         <TextField type="password" label="PASSWORD" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="secondary" onClick={this.login}>Login</Button>
+                        <Button variant="contained" style={styles.button} onClick={this.login}>Login</Button>
                     </form>
                 </Container>
             </React.Fragment>
@@ -69,13 +71,18 @@ class LoginComponent extends React.Component {
 const styles= {
     center :{
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 150
 
     },
     notification: {
         display: 'flex',
         justifyContent: 'center',
         color: '#dc3545'
+    },
+    button:{
+        background: '#8f2086',
+        color: "white"
     }
 }
 

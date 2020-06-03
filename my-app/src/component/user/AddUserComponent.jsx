@@ -40,7 +40,7 @@ class AddUserComponent extends Component{
             <Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Add User</Typography>
+                    <Typography variant="h4" style={style}>Dodaj Korisnika</Typography>
                     <form style={formContainer}>
 
                         <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
@@ -70,8 +70,8 @@ const formContainer = {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default AddUserComponent;

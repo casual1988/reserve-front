@@ -17,6 +17,7 @@ class EditUserComponent extends Component {
             lastName: '',
             employeeId: '',
             contactNumber: '',
+            password: ''
         }
         this.saveUser = this.saveUser.bind(this);
         this.loadUser = this.loadUser.bind(this);
@@ -37,6 +38,7 @@ class EditUserComponent extends Component {
                 lastName: user.lastName,
                 employeeId: user.employeeId,
                 contactNumber: user.contactNumber,
+                password: user.password,
                 })
             });
     }
@@ -59,12 +61,15 @@ class EditUserComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Edit User</Typography>
+                    <Typography variant="h4" style={style}>Izmjena korisnika</Typography>
                     <form>
 
                         <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} disabled/>
 
                         <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
+
+                        <TextField label="PASSWORD" type="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
+
 
                         <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
 
@@ -73,6 +78,7 @@ class EditUserComponent extends Component {
                         <TextField label="BROJ TELEFONA" fullWidth margin="normal" name="contactNumber" value={this.state.contactNumber} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
+                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
 
                     </form>
                 </Container>
@@ -83,7 +89,8 @@ class EditUserComponent extends Component {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default EditUserComponent;

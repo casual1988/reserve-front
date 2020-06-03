@@ -2,6 +2,7 @@ import axios from 'axios';
 import AuthService from './AuthService';
 
 const POLICY_API_BASE_URL = 'http://185.125.123.102:8282/policies';
+const POLICY_REPORT_API_BASE_URL = 'http://185.125.123.102:8282/report';
 
 class PolicyService {
 
@@ -11,6 +12,9 @@ class PolicyService {
 
     fetchPolicyById(policyId) {
         return axios.get(POLICY_API_BASE_URL + '/' + policyId, AuthService.getAuthHeader());
+    }
+    downloadReport() {
+        return axios.get(POLICY_REPORT_API_BASE_URL,  AuthService.getAuthHeader());
     }
 
     fetchPoliciesByUserId() {

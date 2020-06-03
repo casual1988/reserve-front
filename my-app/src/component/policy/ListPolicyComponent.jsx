@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import NavBar from "../Navbar";
 
+
 class ListPolicyComponent extends Component {
 
     constructor(props) {
@@ -61,21 +62,21 @@ class ListPolicyComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Policy Details</Typography>
+                    <Typography variant="h4" style={style}>Detalji Polisa</Typography>
                     <Button variant="contained" color="primary" onClick={() => this.addPolicy()}>
-                        Add Policy
+                        Dodaj Polisu
                     </Button>
 
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
+                                <TableCell align="right">Broj polise</TableCell>
                                 <TableCell align="right">Ime</TableCell>
                                 <TableCell align="right">Prezime</TableCell>
-                                <TableCell align="right">Broj polise</TableCell>
-                                <TableCell align="right">Popust</TableCell>
+                                <TableCell align="right">Premija u KM</TableCell>
+                                <TableCell align="right">Popust u KM</TableCell>
                                 <TableCell align="right">Popust %</TableCell>
-                                <TableCell align="right">Dodatni opis</TableCell>
                                 <TableCell align="right">Datum unosa</TableCell>
                             </TableRow>
                         </TableHead>
@@ -85,12 +86,12 @@ class ListPolicyComponent extends Component {
                                     <TableCell component="th" scope="row">
                                         {row.id}
                                     </TableCell>
+                                    <TableCell align="right">{row.policyNumber}</TableCell>
                                     <TableCell align="right">{row.firstName}</TableCell>
                                     <TableCell align="right">{row.lastName}</TableCell>
-                                    <TableCell align="right">{row.policyNumber}</TableCell>
+                                    <TableCell align="right">{row.price}</TableCell>
                                     <TableCell align="right">{row.discount}</TableCell>
                                     <TableCell align="right">{row.discountPercentage}</TableCell>
-                                    <TableCell align="right">{row.description}</TableCell>
                                     <TableCell align="right">{row.insertDate}</TableCell>
                                     <TableCell align="right" onClick={() => this.editPolicy(row.id)}><CreateIcon /></TableCell>
                                     <TableCell align="right" onClick={() => this.deletePolicy(row.id)}><DeleteIcon /></TableCell>
@@ -108,7 +109,8 @@ class ListPolicyComponent extends Component {
 
 const style ={
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 50
 }
 
 export default ListPolicyComponent;

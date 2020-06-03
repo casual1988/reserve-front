@@ -15,6 +15,9 @@ class AuthService {
     getAuthHeader() {
         return {headers: {Authorization: 'Bearer ' + this.getUserInfo().token }};
     }
+    getAuthToken() {
+        return 'Bearer ' + this.getUserInfo().token;
+    }
 
     logOut() {
         localStorage.removeItem("userInfo");
