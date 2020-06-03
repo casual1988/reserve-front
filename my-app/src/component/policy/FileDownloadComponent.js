@@ -3,12 +3,6 @@ import axios from "axios";
 import AuthService from './../../service/AuthService';
 
 class FileDownloadComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: undefined,
-    };
-  }
 
  
 
@@ -49,7 +43,7 @@ class FileDownloadComponent extends Component {
   };
 
   render() {
-    const { token } = this.state;
+   
     return (
       <div className="container">
         

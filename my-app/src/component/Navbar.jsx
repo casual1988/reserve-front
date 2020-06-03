@@ -6,10 +6,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import AuthService from "../service/AuthService";
 
-<<<<<<< HEAD
-=======
 
->>>>>>> moj_branch
 const style = {
     flexGrow: 1
 }
@@ -17,21 +14,13 @@ const NavBar = () => {
     return (
             <div>
                 <AppBar position="static">
-<<<<<<< HEAD
-                    <Toolbar>
-                        <Typography variant="h6" style={style}>
-                            React User Application
-=======
                     <Toolbar className="App-AuraCollor">
                         <Typography variant="h6" style={style} className="App-AuraCollor">
                             AURA - Mobile agent
->>>>>>> moj_branch
                         </Typography>
                         <Button color="inherit">{AuthService.getUserInfo().username}</Button>
                         <Button color="inherit" component={Link} to="/">Logout</Button>
                     </Toolbar>
-<<<<<<< HEAD
-=======
                         <header>
 
         <nav>
@@ -44,14 +33,10 @@ const NavBar = () => {
             </ul>
         </nav>
         </header>
->>>>>>> moj_branch
                 </AppBar>
             </div>
         )
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> moj_branch
 export default NavBar;
