@@ -19,16 +19,12 @@ class FileDownloadComponent extends Component {
   }
 
   downloadReport = () => {
-    console.log(this.state.dateFrom);
-    console.log(this.state.dateTo);
-    console.log(AuthService.getAuthHeader());
     axios
       .get(
         "http://185.125.123.102:8282/report?dateFrom=" +
-          Moment(this.state.dateFrom).format("yyyy-MM-DD") +
+          this.state.dateFromString +
           "&dateTo=" +
-          (Moment(this.state.dateTo).format("yyyy-MM-DD") !== "Invalid date" &&
-            Moment(this.state.dateTo).format("yyyy-MM-DD")),
+          this.state.dateToString,
         {
           headers: {
             Authorization: AuthService.getAuthToken(),
@@ -40,19 +36,13 @@ class FileDownloadComponent extends Component {
         }
       )
       .then((response) => {
-        //const effectiveFileName = "my filename.xlsx";
-        //FileSaver.saveAs(response.data, effectiveFileName);
-
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        console.log(response.headers);
-        link.setAttribute("download", "AurisPolisaTabela.xlsx"); //or any other extension
+        link.setAttribute("download", "AurisPolisaTabela.xlsx");
         document.body.appendChild(link);
         link.click();
         link.remove();
-        //document.body.removeChild(link);
-        //window.URL.revokeObjectURL(url);
       })
       .catch((error) => {
         console.log(error);
@@ -63,14 +53,20 @@ class FileDownloadComponent extends Component {
   handleStartChange = (e) => {
     this.setState({
       dateFrom: new Date(e.target.value),
-      dateFromString: Moment(e.target.value).format("yyyy-MM-DD"),
+      dateFromString:
+        Moment(e.target.value).format("yyyy-MM-DD") != "Invalid date"
+          ? Moment(e.target.value).format("yyyy-MM-DD")
+          : "",
     });
   };
 
   handleEndChange = (e) => {
     this.setState({
       dateTo: new Date(e.target.value),
-      dateToString: Moment(e.target.value).format("yyyy-MM-DD"),
+      dateToString:
+        Moment(e.target.value).format("yyyy-MM-DD") != "Invalid date"
+          ? Moment(e.target.value).format("yyyy-MM-DD")
+          : "",
     });
   };
 
