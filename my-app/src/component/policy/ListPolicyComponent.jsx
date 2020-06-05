@@ -62,8 +62,8 @@ class ListPolicyComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Detalji Polisa</Typography>
-                    <Button variant="contained" color="primary" onClick={() => this.addPolicy()}>
+                    <Typography variant="h4" style={styles.center}>Detalji Polisa</Typography>
+                    <Button variant="contained" style={styles.button} onClick={() => this.addPolicy()}>
                         Dodaj Polisu
                     </Button>
 
@@ -93,8 +93,8 @@ class ListPolicyComponent extends Component {
                                     <TableCell align="right">{row.discount}</TableCell>
                                     <TableCell align="right">{row.discountPercentage}</TableCell>
                                     <TableCell align="right">{row.insertDate}</TableCell>
-                                    <TableCell align="right" onClick={() => this.editPolicy(row.id)}><CreateIcon /></TableCell>
-                                    <TableCell align="right" onClick={() => this.deletePolicy(row.id)}><DeleteIcon /></TableCell>
+                                    <TableCell align="right"><CreateIcon onClick={() => this.editPolicy(row.id)}></CreateIcon></TableCell>
+                                    <TableCell align="right"><DeleteIcon onClick={() => this.deletePolicy(row.id)}></DeleteIcon></TableCell>
 
                                 </TableRow>
                             ))}
@@ -110,7 +110,21 @@ class ListPolicyComponent extends Component {
 const style ={
     display: 'flex',
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 50,
+    color: '8f2086'
+}
+const styles= {
+    center :{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 10
+
+    },
+    button:{
+        background: '#8f2086',
+        color: "white",
+        margin:5
+    }
 }
 
 export default ListPolicyComponent;

@@ -61,8 +61,8 @@ class ListUserComponent extends Component {
             <React.Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Lista Korisnika</Typography>
-                    <Button variant="contained" color="primary" onClick={() => this.addUser()}>
+                    <Typography variant="h4" style={styles.center}>Lista Korisnika</Typography>
+                    <Button variant="contained" style={styles.button} onClick={() => this.addUser()}>
                         Dodaj Korisnika
                     </Button>
 
@@ -86,8 +86,10 @@ class ListUserComponent extends Component {
                                     <TableCell align="right">{row.lastName}</TableCell>
                                     <TableCell align="right">{row.username}</TableCell>
                                     <TableCell align="right">{row.employeeId}</TableCell>
-                                    <TableCell align="right" onClick={() => this.editUser(row.id)}><CreateIcon /></TableCell>
-                                    <TableCell align="right" onClick={() => this.deleteUser(row.id)}><DeleteIcon /></TableCell>
+                                    <TableCell align="right" >
+                                        <CreateIcon onClick={() => this.editUser(row.id)}></CreateIcon></TableCell>
+                                    <TableCell  align="right" >
+                                       <DeleteIcon onClick={() => this.deleteUser(row.id)}></DeleteIcon></TableCell>
 
                                 </TableRow>
                             ))}
@@ -100,10 +102,19 @@ class ListUserComponent extends Component {
 
 }
 
-const style ={
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: 50
+
+
+const styles= {
+    center :{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 50
+
+    },
+    button:{
+        background: '#8f2086',
+        color: "white"
+    }
 }
 
 export default ListUserComponent;

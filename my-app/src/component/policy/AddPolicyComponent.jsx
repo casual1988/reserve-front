@@ -43,7 +43,7 @@ class AddPolicyComponent extends Component{
             <Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Dodaj Polisu</Typography>
+                    <Typography variant="h4" style={styles.center}>Dodaj Polisu</Typography>
                     <form style={formContainer}>
 
                         <TextField label="BROJ POLISE" fullWidth margin="normal" name="policyNumber" value={this.state.policyNumber} onChange={this.onChange}/>
@@ -61,8 +61,9 @@ class AddPolicyComponent extends Component{
                        
                         <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="primary" onClick={this.savePolicy}>Snimi</Button>
-                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-policy')}>Odustani</Button>
+                        <Button variant="contained" style={styles.button} onClick={this.savePolicy}>Snimi</Button>
+                        
+                        <Button variant="contained" style={styles.button} onClick={() => this.props.history.push('/list-policy')}>Odustani</Button>
                     </form>
                 </Container>
             </Fragment>
@@ -74,10 +75,18 @@ const formContainer = {
     flexFlow: 'row wrap'
 };
 
-const style ={
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: 50
+const styles= {
+    center :{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 10
+
+    },
+    button:{
+        background: '#8f2086',
+        color: "white",
+        margin:5
+    }
 }
 
 export default AddPolicyComponent;

@@ -41,7 +41,9 @@ class EditPolicyComponent extends Component {
                 discount: policy.discount,
                 discountPercentage: policy.discountPercentage,
                 price: policy.price,
-                description: policy.description
+                description: policy.description, 
+                insertDate: policy.insertDate,
+                userId:policy.userId
                 })
             });
     }
@@ -53,7 +55,7 @@ class EditPolicyComponent extends Component {
         e.preventDefault();
         let policy = {id: this.state.id, policyNumber: this.state.policyNumber, discount: this.state.discount, 
             firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,
-            price: this.state.price, description: this.state.description, carType: this.state.carType};
+            price: this.state.price, description: this.state.description, carType: this.state.carType,insertDate: this.state.insertDate, userId:this.state.userId };
             PolicyService.editPolicy(policy)
             .then(res => {
                 this.setState({message : 'policy added successfully.'});

@@ -40,7 +40,7 @@ class AddUserComponent extends Component{
             <Fragment>
                 <NavBar/>
                 <Container>
-                    <Typography variant="h4" style={style}>Dodaj Korisnika</Typography>
+                    <Typography variant="h4" style={styles.center}>Dodaj Korisnika</Typography>
                     <form style={formContainer}>
 
                         <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
@@ -55,8 +55,8 @@ class AddUserComponent extends Component{
 
                         <TextField label="BROJ TELEFONA" fullWidth margin="normal" name="contactNumber" value={this.state.contactNumber} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="primary" onClick={this.saveUser}>Snimi</Button>
-                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
+                        <Button variant="contained" style={styles.button} onClick={this.saveUser}>Snimi</Button>
+                        <Button variant="contained" style={styles.button} onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
                     </form>
                 </Container>
             </Fragment>
@@ -68,10 +68,18 @@ const formContainer = {
     flexFlow: 'row wrap'
 };
 
-const style ={
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: 50
+const styles= {
+    center :{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 10
+
+    },
+    button:{
+        background: '#8f2086',
+        color: "white",
+        margin:5
+    }
 }
 
 export default AddUserComponent;
