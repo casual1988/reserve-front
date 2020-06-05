@@ -18,6 +18,7 @@ class EditPolicyComponent extends Component {
             firstName: '',
             lastName: '',
             price: '',
+            policyType:'',
             description:'',
             message: null
         }
@@ -43,7 +44,8 @@ class EditPolicyComponent extends Component {
                 price: policy.price,
                 description: policy.description, 
                 insertDate: policy.insertDate,
-                userId:policy.userId
+                userId:policy.userId,
+                policyType: policy.policyType
                 })
             });
     }
@@ -54,7 +56,7 @@ class EditPolicyComponent extends Component {
     savePolicy = (e) => {
         e.preventDefault();
         let policy = {id: this.state.id, policyNumber: this.state.policyNumber, discount: this.state.discount, 
-            firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,
+            firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,policyType: this.state.policyType,
             price: this.state.price, description: this.state.description, carType: this.state.carType,insertDate: this.state.insertDate, userId:this.state.userId };
             PolicyService.editPolicy(policy)
             .then(res => {
@@ -82,7 +84,9 @@ class EditPolicyComponent extends Component {
                     <TextField label="POPUST U KM" type="number" fullWidth margin="normal" name="discount" value={this.state.discount} onChange={this.onChange}/>
 
                     <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
-                  
+                    
+                    <TextField label="TIP POLISE" fullWidth margin="normal" name="policyType" value={this.state.policyType} onChange={this.onChange}/>
+
                     <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                         <Button variant="contained" color="primary" onClick={this.savePolicy}>Save</Button>

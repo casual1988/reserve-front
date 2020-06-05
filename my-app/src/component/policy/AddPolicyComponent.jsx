@@ -17,6 +17,7 @@ class AddPolicyComponent extends Component{
             firstName: '',
             lastName: '',
             price: '',
+            policyType: '',
             description:'',
             message: null
         }
@@ -27,7 +28,7 @@ class AddPolicyComponent extends Component{
         e.preventDefault();
         let policy = {policyNumber: this.state.policyNumber, discount: this.state.discount, 
             firstName: this.state.firstName, lastName: this.state.lastName, discountPercentage:this.state.discountPercentage,
-            price: this.state.price,  description: this.state.description};
+            price: this.state.price,  description: this.state.description, policyType: this.state.policyType};
         PolicyService.addPolicy(policy)
             .then(res => {
                 this.setState({message : 'Policy added successfully.'});
@@ -58,7 +59,8 @@ class AddPolicyComponent extends Component{
 
                         <TextField label="POPUST %" type="number" fullWidth margin="normal" name="discountPercentage" value={this.state.discountPercentage} onChange={this.onChange}/>
                      
-                       
+                        <TextField label="TIP POLISE" fullWidth margin="normal" name="policyType" value={this.state.policyType} onChange={this.onChange}/>
+
                         <TextField label="DODATNI OPIS" fullWidth margin="normal" name="description" value={this.state.description} onChange={this.onChange}/>
 
                         <Button variant="contained" style={styles.button} onClick={this.savePolicy}>Snimi</Button>
