@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import ListUserComponent from "./user/ListUserComponent";
 import AddUserComponent from "./user/AddUserComponent";
 import EditUserComponent from "./user/EditUserComponent";
@@ -11,23 +16,29 @@ import FileDownloadComponent from "./policy/FileDownloadComponent";
 
 import React from "react";
 import LoginComponent from "./user/LoginComponent";
+import LogoutComponent from "./user/LogoutComponent";
+import PrivateRoute from "./PrivateRoute";
 
 const AppRouter = () => {
-    return(
-            <Router>
-                    <Switch>
-                        <Route path="/" exact component={LoginComponent} />
-                        <Route path="/list-user" component={ListUserComponent} />
-                        <Route path="/add-user" component={AddUserComponent} />
-                        <Route path="/edit-user" component={EditUserComponent} />
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/list-policy" />
+        </Route>
+        <Route path="/login" component={LoginComponent} />
+        <Route path="/logout" component={LogoutComponent} />
 
-                        <Route path="/list-policy" component={ListPolicyComponent} />
-                        <Route path="/add-policy" component={AddPolicyComponent} />
-                        <Route path="/edit-policy" component={EditPolicyComponent} />
-                        <Route path="/file-download" component={FileDownloadComponent} />
-                    </Switch>
-            </Router>
-    )
-}
+        <PrivateRoute path="/list-user" component={ListUserComponent} />
+        <PrivateRoute path="/add-user" component={AddUserComponent} />
+        <PrivateRoute path="/edit-user" component={EditUserComponent} />
+        <PrivateRoute path="/list-policy" component={ListPolicyComponent} />
+        <PrivateRoute path="/add-policy" component={AddPolicyComponent} />
+        <PrivateRoute path="/edit-policy" component={EditPolicyComponent} />
+        <PrivateRoute path="/file-download" component={FileDownloadComponent} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default AppRouter;
