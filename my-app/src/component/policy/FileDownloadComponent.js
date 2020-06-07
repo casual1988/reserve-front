@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AuthService from "./../../service/AuthService";
-import { TextField } from "@material-ui/core";
+import { TextField, CircularProgress } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
 import Typography from "@material-ui/core/Typography";
@@ -15,10 +15,13 @@ class FileDownloadComponent extends Component {
       dateFromString: Moment(this.dateFrom).format("yyyy-MM-DD"),
       dateTo: new Date(),
       dateToString: Moment(this.dateTo).format("yyyy-MM-DD"),
+      loading: false,
+      errMsg: undefined,
     };
   }
 
   downloadReport = () => {
+    this.setState({ loading: true });
     axios
       .get(
         "http://185.125.123.102:8282/report?dateFrom=" +
@@ -33,9 +36,11 @@ class FileDownloadComponent extends Component {
               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
           },
           responseType: "arraybuffer",
+          timeout: 10000,
         }
       )
       .then((response) => {
+        this.setState({ loading: false });
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
@@ -45,8 +50,9 @@ class FileDownloadComponent extends Component {
         link.remove();
       })
       .catch((error) => {
+        this.setState({ loading: false });
         console.log(error);
-        console.log("FileDownloadComponent cant authenticate");
+        this.setState({ errMsg: "Došlo je do greške." });
       });
   };
 
@@ -104,14 +110,18 @@ class FileDownloadComponent extends Component {
                 this.handleEndChange(e);
               }}
             />
-            <div
-              className="btn btn-primary"
-              onClick={(e) => {
-                this.downloadReport(e);
-              }}
-            >
-              Download report
-            </div>
+            {!this.state.loading && (
+              <div
+                className="btn btn-primary"
+                onClick={(e) => {
+                  this.downloadReport(e);
+                }}
+              >
+                Download report
+              </div>
+            )}
+            {this.state.loading && <CircularProgress />}
+            {this.state.errMsg && <div>{this.state.errMsg}</div>}
           </div>
         </Container>
       </React.Fragment>
