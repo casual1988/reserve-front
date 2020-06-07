@@ -48,9 +48,11 @@ class AddPolicyComponent extends Component {
       },
       () => {
         const { price, discount } = this.state;
-        price &&
-          discount &&
-          this.setState({ discountPercentage: (discount * 100) / price });
+        price && discount
+          ? this.setState({
+              discountPercentage: ((discount * 100) / price).toFixed(2),
+            })
+          : this.setState({ discountPercentage: 0 });
       }
     );
   };
