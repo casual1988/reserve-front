@@ -12,7 +12,7 @@ class AddPolicyComponent extends Component {
     this.state = {
       policyNumber: "",
       discount: "",
-      discountPercentage: "",
+      discountPercentage: 0,
       firstName: "",
       lastName: "",
       price: "",
@@ -48,9 +48,11 @@ class AddPolicyComponent extends Component {
       },
       () => {
         const { price, discount } = this.state;
-        price && discount
+        price > 0 && discount > 0
           ? this.setState({
-              discountPercentage: ((discount * 100) / price).toFixed(2),
+              discountPercentage: parseFloat(
+                ((discount * 100) / price).toFixed(2)
+              ),
             })
           : this.setState({ discountPercentage: 0 });
       }
@@ -120,7 +122,11 @@ class AddPolicyComponent extends Component {
               fullWidth
               margin="normal"
               name="discountPercentage"
-              value={this.state.discountPercentage}
+              value={
+                this.state.discountPercentage !== 0
+                  ? this.state.discountPercentage
+                  : ""
+              }
             />
 
             <TextField
