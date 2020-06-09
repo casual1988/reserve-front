@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import AuthService from "../service/AuthService";
+import logo from "./../logo-aura-osiguranje.svg";
 
 const style = {
   flexGrow: 1,
@@ -15,9 +16,9 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar className="App-AuraCollor">
           <Typography variant="h6" style={style} className="App-AuraCollor">
-            AURA - Mobile agent
+          <img src={logo} alt="Logo" height='125px' width='120px'/>   
           </Typography>
-          <Button color="inherit">{AuthService.getUserInfo().username}</Button>
+          <Button color="inherit">{AuthService.getUserInfo().username} </Button>
           <Button color="inherit" component={Link} to="/logout">
             Logout
           </Button>

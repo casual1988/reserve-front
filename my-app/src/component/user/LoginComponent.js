@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import AuthService from "../../service/AuthService";
-//import logo from './../../logo.svg';
+import logo from "./../../logo-aura-osiguranje.svg";
 
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -46,13 +46,13 @@ class LoginComponent extends React.Component {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar className="App-AuraCollor">
-            <Typography variant="h6" className="App-AuraCollor">
-              AURA - Mobile agent
+            <Typography  className="App-AuraCollor">
+            <img src={logo} alt="Logo" height='125px' width='120px'/>   
             </Typography>
           </Toolbar>
         </AppBar>
-        <Container maxWidth="sm">
-          <Typography variant="h4" style={styles.center}>
+        <Container maxWidth="xs">
+          <Typography variant="h4" style={styles.center} >
             Prijava
           </Typography>
           <form>
@@ -98,7 +98,7 @@ const styles = {
   center: {
     display: "flex",
     justifyContent: "center",
-    marginTop: 150,
+    marginTop: 100,
   },
   notification: {
     display: "flex",
@@ -108,6 +108,8 @@ const styles = {
   button: {
     background: "#8f2086",
     color: "white",
+  },logo: {
+    justifyContent: "center",
   },
 };
 
