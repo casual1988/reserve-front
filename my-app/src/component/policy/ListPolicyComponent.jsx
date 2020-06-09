@@ -71,14 +71,15 @@ class ListPolicyComponent extends Component {
   }
 
   render() {
-    return this.state.showConfirmDeletionDialog ? (
-      <OkCancelDialog
-        handleCancel={this.hideConfirmDeletionDialog}
-        handleOK={this.deletePolicy}
-        message="Da li ste sigurni da zelite izbrisati polisu?"
-      />
-    ) : (
+    return (
       <React.Fragment>
+        {this.state.showConfirmDeletionDialog && (
+          <OkCancelDialog
+            handleCancel={this.hideConfirmDeletionDialog}
+            handleOK={this.deletePolicy}
+            message="Da li ste sigurni da zelite izbrisati polisu?"
+          />
+        )}
         <NavBar />
         <Container>
           <Typography variant="h4" style={styles.center}>
