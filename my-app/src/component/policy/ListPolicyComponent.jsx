@@ -11,6 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
+import OkCancelDialog from "../dialog/OkCancelDialog";
 
 class ListPolicyComponent extends Component {
   constructor(props) {
@@ -18,25 +19,36 @@ class ListPolicyComponent extends Component {
     this.state = {
       policies: [],
       message: null,
+      showConfirmDeletionDialog: false,
+      idToDelete: undefined,
     };
-
-    this.deletePolicy = this.deletePolicy.bind(this);
-    this.editPolicy = this.editPolicy.bind(this);
-    this.addPolicy = this.addPolicy.bind(this);
-    this.reloadPolicyList = this.reloadPolicyList.bind(this);
   }
 
   componentDidMount() {
     this.reloadPolicyList();
   }
 
-  reloadPolicyList() {
+  reloadPolicyList = () => {
     PolicyService.fetchPoliciesByUserId().then((res) => {
       this.setState({ policies: res.data.result });
     });
-  }
+  };
 
-  deletePolicy(policyId) {
+  showConfirmDeletionDialog = () => {
+    this.setState({ showConfirmDeletionDialog: true });
+  };
+
+  hideConfirmDeletionDialog = () => {
+    this.setState({ showConfirmDeletionDialog: false });
+  };
+
+  triggerDelete = (policyId) => {
+    this.setState({ idToDelete: policyId });
+    this.showConfirmDeletionDialog();
+  };
+
+  deletePolicy = () => {
+    const policyId = this.state.idToDelete;
     PolicyService.deletePolicy(policyId).then((res) => {
       this.setState({ message: "Policy deleted successfully." });
       this.setState({
@@ -45,7 +57,8 @@ class ListPolicyComponent extends Component {
         ),
       });
     });
-  }
+    this.hideConfirmDeletionDialog();
+  };
 
   editPolicy(id) {
     window.localStorage.setItem("policyId", id);
@@ -58,7 +71,13 @@ class ListPolicyComponent extends Component {
   }
 
   render() {
-    return (
+    return this.state.showConfirmDeletionDialog ? (
+      <OkCancelDialog
+        handleCancel={this.hideConfirmDeletionDialog}
+        handleOK={this.deletePolicy}
+        message="Da li ste sigurni da zelite izbrisati polisu?"
+      />
+    ) : (
       <React.Fragment>
         <NavBar />
         <Container>
@@ -112,7 +131,7 @@ class ListPolicyComponent extends Component {
                     </TableCell>
                     <TableCell align="right">
                       <DeleteIcon
-                        onClick={() => this.deletePolicy(row.id)}
+                        onClick={() => this.triggerDelete(row.id)}
                       ></DeleteIcon>
                     </TableCell>
                   </TableRow>
