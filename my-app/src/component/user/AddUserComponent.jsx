@@ -43,9 +43,9 @@ class AddUserComponent extends Component{
                     <Typography variant="h4" style={styles.center}>Dodaj Korisnika</Typography>
                     <form style={formContainer}>
 
-                        <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
+                        <TextField label="KORISNIČKO IME" fullWidth margin="normal" name="username" value={this.state.username} onChange={this.onChange}/>
 
-                        <TextField label="PASSWORD" type="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
+                        <TextField label="LOZINKA" type="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
                         <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 

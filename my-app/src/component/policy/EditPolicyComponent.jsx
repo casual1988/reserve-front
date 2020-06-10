@@ -175,14 +175,14 @@ class EditPolicyComponent extends Component {
 
             <Button
               variant="contained"
-              color="primary"
+              style={styles.button}
               onClick={this.savePolicy}
             >
-              Save
+              Snimi
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              style={styles.button}
               onClick={() => this.props.history.push("/list-policy")}
             >
               Odustani
@@ -199,5 +199,18 @@ const style = {
   justifyContent: "center",
   marginTop: 50,
 };
+
+const styles = {
+    center: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: 10,
+    },
+    button: {
+      background: "#8f2086",
+      color: "white",
+      margin: 5,
+    },
+  };
 
 export default EditPolicyComponent;

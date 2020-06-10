@@ -64,11 +64,11 @@ class EditUserComponent extends Component {
                     <Typography variant="h4" style={style}>Izmjena korisnika</Typography>
                     <form>
 
-                        <TextField label="USERNAME" fullWidth margin="normal" name="username" value={this.state.username} disabled/>
+                        <TextField label="KORISNIČKO IME" fullWidth margin="normal" name="username" value={this.state.username} disabled/>
 
                         <TextField label="IME" fullWidth margin="normal" name="firstName" value={this.state.firstName} onChange={this.onChange}/>
 
-                        <TextField label="PASSWORD" type="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
+                        <TextField label="LOZINKA" type="password" fullWidth margin="normal" name="password" value={this.state.password} onChange={this.onChange}/>
 
 
                         <TextField label="PREZIME" fullWidth margin="normal" name="lastName" value={this.state.lastName} onChange={this.onChange}/>
@@ -77,8 +77,8 @@ class EditUserComponent extends Component {
 
                         <TextField label="BROJ TELEFONA" fullWidth margin="normal" name="contactNumber" value={this.state.contactNumber} onChange={this.onChange}/>
 
-                        <Button variant="contained" color="primary" onClick={this.saveUser}>Save</Button>
-                        <Button variant="contained" color="primary" onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
+                        <Button variant="contained" style={styles.button} onClick={this.saveUser}>Snimi</Button>
+                        <Button variant="contained" style={styles.button} onClick={() => this.props.history.push('/list-user')}>Odustani</Button>
 
                     </form>
                 </Container>
@@ -92,5 +92,17 @@ const style ={
     justifyContent: 'center',
     marginTop: 50
 }
+const styles = {
+    center: {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: 10,
+    },
+    button: {
+      background: "#8f2086",
+      color: "white",
+      margin: 5,
+    },
+  };
 
 export default EditUserComponent;

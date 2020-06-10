@@ -69,23 +69,21 @@ class ListUserComponent extends Component {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Id</TableCell>
                                 <TableCell align="right">Ime</TableCell>
                                 <TableCell align="right">Prezime</TableCell>
-                                <TableCell align="right">UserName</TableCell>
+                                <TableCell align="right">Korisničko ime</TableCell>
                                 <TableCell align="right">Zastupnik ID</TableCell>
+                                <TableCell align="right">Broj telefona</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.users.map(row => (
                                 <TableRow key={row.id}>
-                                    <TableCell component="th" scope="row">
-                                        {row.id}
-                                    </TableCell>
                                     <TableCell align="right">{row.firstName}</TableCell>
                                     <TableCell align="right">{row.lastName}</TableCell>
                                     <TableCell align="right">{row.username}</TableCell>
                                     <TableCell align="right">{row.employeeId}</TableCell>
+                                    <TableCell align="right">{row.contactNumber}</TableCell>
                                     <TableCell align="right" >
                                         <CreateIcon onClick={() => this.editUser(row.id)}></CreateIcon></TableCell>
                                     <TableCell  align="right" >

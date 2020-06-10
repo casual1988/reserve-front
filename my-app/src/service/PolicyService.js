@@ -1,8 +1,8 @@
 import axios from 'axios';
 import AuthService from './AuthService';
 
-const POLICY_API_BASE_URL = 'http://185.125.123.102:8282/policies';
-const POLICY_REPORT_API_BASE_URL = 'http://185.125.123.102:8282/report';
+const POLICY_API_BASE_URL = 'http://localhost:8080/policies';
+const POLICY_REPORT_API_BASE_URL = 'http://localhost:8080/report';
 
 class PolicyService {
 

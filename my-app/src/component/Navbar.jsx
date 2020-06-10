@@ -17,10 +17,12 @@ const NavBar = () => {
         <Toolbar className="App-AuraCollor">
           <Typography variant="h6" style={style} className="App-AuraCollor">
           <img src={logo} alt="Logo" height='125px' width='120px'/>   
+          
           </Typography>
+          <Typography variant="h5">  Mobile Agent </Typography>
           <Button color="inherit">{AuthService.getUserInfo().username} </Button>
           <Button color="inherit" component={Link} to="/logout">
-            Logout
+            Odjavi se
           </Button>
         </Toolbar>
         <header>

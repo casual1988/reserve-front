@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
-const USER_API_BASE_URL = "http://185.125.123.102:8282/token/";
+const USER_API_BASE_URL = "http://localhost:8080/token/";
 
 class AuthService {
   login(credentials) {
