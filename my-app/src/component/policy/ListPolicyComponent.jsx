@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
 import OkCancelDialog from "../dialog/OkCancelDialog";
+import Moment from "moment";
 
 class ListPolicyComponent extends Component {
   constructor(props) {
@@ -99,7 +100,6 @@ class ListPolicyComponent extends Component {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Id</TableCell>
                   <TableCell align="right">Broj polise</TableCell>
                   <TableCell align="right">Ime</TableCell>
                   <TableCell align="right">Prezime</TableCell>
@@ -107,14 +107,12 @@ class ListPolicyComponent extends Component {
                   <TableCell align="right">Popust u KM</TableCell>
                   <TableCell align="right">Popust %</TableCell>
                   <TableCell align="right">Datum unosa</TableCell>
+                  <TableCell align="right">Opis</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {this.state.policies.map((row) => (
                   <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
                     <TableCell align="right">{row.policyNumber}</TableCell>
                     <TableCell align="right">{row.firstName}</TableCell>
                     <TableCell align="right">{row.lastName}</TableCell>
@@ -123,7 +121,8 @@ class ListPolicyComponent extends Component {
                     <TableCell align="right">
                       {row.discountPercentage}
                     </TableCell>
-                    <TableCell align="right">{row.insertDate}</TableCell>
+                    <TableCell align="right" >{Moment(row.insertDate).format("DD/MM/YYYY hh:mm")}</TableCell>
+                    <TableCell align="right">{row.description}</TableCell>
                     <TableCell align="right">
                       <CreateIcon
                         onClick={() => this.editPolicy(row.id)}
