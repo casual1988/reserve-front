@@ -47,12 +47,14 @@ class LoginComponent extends React.Component {
         <AppBar position="static">
           <Toolbar className="App-AuraCollor">
             <Typography  className="App-AuraCollor">
-            <img src={logo} alt="Logo" height='125px' width='120px'/>   
+            <img src={logo} alt="Logo" height='125px' width='120px'/> 
+           
             </Typography>
+            <Typography variant="h5">  Mobile Agent </Typography>
           </Toolbar>
         </AppBar>
         <Container maxWidth="xs">
-          <Typography variant="h4" style={styles.center} >
+          <Typography variant="h3" style={styles.center} >
             Prijava
           </Typography>
           <form>
@@ -61,7 +63,7 @@ class LoginComponent extends React.Component {
             </Typography>
             <TextField
               type="text"
-              label="USERNAME"
+              label="KORISNIČKO IME"
               fullWidth
               margin="normal"
               name="username"
@@ -71,7 +73,7 @@ class LoginComponent extends React.Component {
 
             <TextField
               type="password"
-              label="PASSWORD"
+              label="LOZINKA"
               fullWidth
               margin="normal"
               name="password"
@@ -85,7 +87,7 @@ class LoginComponent extends React.Component {
               style={styles.button}
               onClick={this.login}
             >
-              Login
+              Prijavi se
             </Button>
           </form>
         </Container>

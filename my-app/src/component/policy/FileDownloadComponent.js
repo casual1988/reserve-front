@@ -24,7 +24,7 @@ class FileDownloadComponent extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        "http://185.125.123.102:8282/report?dateFrom=" +
+        "http://localhost:8080/report?dateFrom=" +
           this.state.dateFromString +
           "&dateTo=" +
           this.state.dateToString,
@@ -117,7 +117,7 @@ class FileDownloadComponent extends Component {
                   this.downloadReport(e);
                 }}
               >
-                Download report
+                Generiši izvještaj
               </div>
             )}
             {this.state.loading && <CircularProgress />}
