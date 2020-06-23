@@ -33,6 +33,7 @@ class LoginComponent extends React.Component {
       if (res.data.status === 200) {
         localStorage.setItem("userInfo", JSON.stringify(res.data.result));
         this.props.history.push(this.props.history.location.state.referer);
+        AuthService.printAuthoritiesToConsole();
       } else {
         this.setState({ message: res.data.message });
       }
@@ -46,15 +47,14 @@ class LoginComponent extends React.Component {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar className="App-AuraCollor">
-            <Typography  className="App-AuraCollor">
-            <img src={logo} alt="Logo" height='125px' width='120px'/> 
-           
+            <Typography className="App-AuraCollor">
+              <img src={logo} alt="Logo" height="125px" width="120px" />
             </Typography>
-            <Typography variant="h5">  Mobile Agent </Typography>
+            <Typography variant="h5"> Mobile Agent </Typography>
           </Toolbar>
         </AppBar>
         <Container maxWidth="xs">
-          <Typography variant="h3" style={styles.center} >
+          <Typography variant="h3" style={styles.center}>
             Prijava
           </Typography>
           <form>
@@ -110,7 +110,8 @@ const styles = {
   button: {
     background: "#8f2086",
     color: "white",
-  },logo: {
+  },
+  logo: {
     justifyContent: "center",
   },
 };

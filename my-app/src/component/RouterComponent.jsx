@@ -18,6 +18,9 @@ import React from "react";
 import LoginComponent from "./user/LoginComponent";
 import LogoutComponent from "./user/LogoutComponent";
 import PrivateRoute from "./PrivateRoute";
+import EditUserRolesComponent from "./role/EditUserRolesComponent";
+import RolePermissionsListComponent from "./role/RolePermissionsListComponent";
+import AddRoleComponent from "./role/AddRoleComponent";
 
 const AppRouter = () => {
   return (
@@ -36,6 +39,12 @@ const AppRouter = () => {
         <PrivateRoute path="/add-policy" component={AddPolicyComponent} />
         <PrivateRoute path="/edit-policy" component={EditPolicyComponent} />
         <PrivateRoute path="/file-download" component={FileDownloadComponent} />
+        <PrivateRoute path="/manage-roles" component={EditUserRolesComponent} />
+        <PrivateRoute path="/create-role" component={AddRoleComponent} />
+        <PrivateRoute
+          path="/manage-permissions"
+          component={RolePermissionsListComponent}
+        />
       </Switch>
     </Router>
   );

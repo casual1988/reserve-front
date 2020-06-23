@@ -21,7 +21,7 @@ class EditUserComponent extends Component {
       employeeId: "",
       contactNumber: "",
       password: "",
-      state: 0,
+      state: 1,
     };
     this.saveUser = this.saveUser.bind(this);
     this.loadUser = this.loadUser.bind(this);
@@ -50,7 +50,7 @@ class EditUserComponent extends Component {
   }
 
   onChange = (e) => {
-    console.log("setting " + [e.target.name] + " to " + e.target.value);
+    //console.log("setting " + [e.target.name] + " to " + e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -139,7 +139,7 @@ class EditUserComponent extends Component {
               <InputLabel id="demo-simple-select-label">Entitet</InputLabel>
               <Select
                 name="state"
-                value={this.state.state}
+                value={this.state.state ? this.state.state : 1}
                 onChange={this.onChange}
               >
                 <MenuItem value={1}>Republika Srpska</MenuItem>

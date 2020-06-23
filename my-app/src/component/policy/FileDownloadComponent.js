@@ -60,7 +60,7 @@ class FileDownloadComponent extends Component {
     this.setState({
       dateFrom: new Date(e.target.value),
       dateFromString:
-        Moment(e.target.value).format("yyyy-MM-DD") != "Invalid date"
+        Moment(e.target.value).format("yyyy-MM-DD") !== "Invalid date"
           ? Moment(e.target.value).format("yyyy-MM-DD")
           : "",
     });
@@ -70,7 +70,7 @@ class FileDownloadComponent extends Component {
     this.setState({
       dateTo: new Date(e.target.value),
       dateToString:
-        Moment(e.target.value).format("yyyy-MM-DD") != "Invalid date"
+        Moment(e.target.value).format("yyyy-MM-DD") !== "Invalid date"
           ? Moment(e.target.value).format("yyyy-MM-DD")
           : "",
     });

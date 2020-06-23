@@ -38,6 +38,20 @@ class AuthService {
 
     return true;
   }
+
+  printAuthoritiesToConsole() {
+    const decode = jwt.decode(this.getUserInfo().token, { complete: true });
+    console.log("Authorities: ");
+    console.log(decode.payload.scopes);
+  }
+
+  hasAuthority(permission) {
+    const decode = jwt.decode(this.getUserInfo().token, { complete: true });
+    for (var i = 0; i < decode.payload.scopes.length; i++) {
+      if (decode.payload.scopes[i].authority === permission) return true;
+    }
+    return false;
+  }
 }
 
 export default new AuthService();

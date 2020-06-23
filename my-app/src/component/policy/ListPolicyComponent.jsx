@@ -13,6 +13,7 @@ import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
 import OkCancelDialog from "../dialog/OkCancelDialog";
 import Moment from "moment";
+import AuthService from "../../service/AuthService";
 
 class ListPolicyComponent extends Component {
   constructor(props) {
@@ -30,9 +31,21 @@ class ListPolicyComponent extends Component {
   }
 
   reloadPolicyList = () => {
-    PolicyService.fetchPoliciesByUserId().then((res) => {
-      this.setState({ policies: res.data.result });
-    });
+    AuthService.hasAuthority("ROLE_POLICY_LIST_READ")
+      ? PolicyService.fetchPoliciesByUserId()
+          .then((res) => {
+            if (res.data.status === 200) {
+              this.setState({ policies: res.data.result });
+            } else {
+              this.setState({ policies: [], message: res.data.message });
+            }
+          })
+          .catch((error) => {
+            this.setState({
+              message: "Greska tokom citanja podataka (" + error + ")",
+            });
+          })
+      : this.setState({ message: "Nemate potrebne dozvole" });
   };
 
   showConfirmDeletionDialog = () => {
@@ -86,18 +99,18 @@ class ListPolicyComponent extends Component {
           <Typography variant="h4" style={styles.center}>
             Detalji Polisa
           </Typography>
-          <Button
-            variant="contained"
-            style={styles.button}
-            onClick={() => this.addPolicy()}
-          >
-            Dodaj Polisu
-          </Button>
-
-          {this.state.policies === null && (
-            <div>Greska tokom citanja polisa</div>
+          {AuthService.hasAuthority("ROLE_POLICY_CREATE") && (
+            <Button
+              variant="contained"
+              style={styles.button}
+              onClick={() => this.addPolicy()}
+            >
+              Dodaj Polisu
+            </Button>
           )}
-          {this.state.policies !== null && (
+
+          {this.state.message && <div>{this.state.message}</div>}
+          {!this.state.message && this.state.policies !== null && (
             <Table>
               <TableHead>
                 <TableRow>
@@ -122,7 +135,9 @@ class ListPolicyComponent extends Component {
                     <TableCell align="right">
                       {row.discountPercentage}
                     </TableCell>
-                    <TableCell align="right" >{Moment(row.insertDate).format("DD/MM/YYYY hh:mm")}</TableCell>
+                    <TableCell align="right">
+                      {Moment(row.insertDate).format("DD/MM/YYYY hh:mm")}
+                    </TableCell>
                     <TableCell align="right">{row.description}</TableCell>
                     <TableCell align="right">
                       <CreateIcon
@@ -145,12 +160,6 @@ class ListPolicyComponent extends Component {
   }
 }
 
-const style = {
-  display: "flex",
-  justifyContent: "center",
-  marginTop: 50,
-  color: "8f2086",
-};
 const styles = {
   center: {
     display: "flex",

@@ -16,10 +16,9 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar className="App-AuraCollor">
           <Typography variant="h6" style={style} className="App-AuraCollor">
-          <img src={logo} alt="Logo" height='125px' width='120px'/>   
-          
+            <img src={logo} alt="Logo" height="125px" width="120px" />
           </Typography>
-          <Typography variant="h5">  Mobile Agent </Typography>
+          <Typography variant="h5"> Mobile Agent </Typography>
           <Button color="inherit">{AuthService.getUserInfo().username} </Button>
           <Button color="inherit" component={Link} to="/logout">
             Odjavi se
@@ -31,18 +30,26 @@ const NavBar = () => {
               <li>
                 <Link to="/list-policy">Početna</Link>
               </li>
-              <li>
-                <Link to="/add-policy">Dodaj polisu</Link>
-              </li>
-              <li>
-                <Link to="/add-user">Dodaj korisnika</Link>
-              </li>
-              <li>
-                <Link to="/list-user">Lista korisnika</Link>
-              </li>
-              <li>
-                <Link to="/file-download">Export polisa</Link>
-              </li>
+              {AuthService.hasAuthority("ROLE_POLICY_CREATE") && (
+                <li>
+                  <Link to="/add-policy">Dodaj polisu</Link>
+                </li>
+              )}
+              {AuthService.hasAuthority("ROLE_USER_CREATE") && (
+                <li>
+                  <Link to="/add-user">Dodaj korisnika</Link>
+                </li>
+              )}
+              {AuthService.hasAuthority("ROLE_USER_READ_ALL") && (
+                <li>
+                  <Link to="/list-user">Lista korisnika</Link>
+                </li>
+              )}
+              {AuthService.hasAuthority("ROLE_REPORTS") && (
+                <li>
+                  <Link to="/file-download">Export polisa</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </header>
