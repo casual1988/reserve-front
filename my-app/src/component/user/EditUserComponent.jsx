@@ -147,12 +147,12 @@ class EditUserComponent extends Component {
               </Select>
             </FormControl>
 
-            <Button variant="contained" style="styles.button" onClick={this.saveUser}>
+            <Button variant="contained" style={styles.button} onClick={this.saveUser}>
               Save
             </Button>
             <Button
               variant="contained"
-              style="styles.button"
+              style={styles.button}
               onClick={() => this.props.history.push("/list-user")}
             >
               Odustani
