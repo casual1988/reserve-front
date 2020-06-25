@@ -147,12 +147,12 @@ class EditUserComponent extends Component {
               </Select>
             </FormControl>
 
-            <Button variant="contained" color="primary" onClick={this.saveUser}>
+            <Button variant="contained" style={styles.button} onClick={this.saveUser}>
               Save
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              style={styles.button}
               onClick={() => this.props.history.push("/list-user")}
             >
               Odustani
@@ -170,7 +170,18 @@ const style = {
   marginTop: 50,
 };
 
+
 const styles = {
+  center: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  button: {
+    background: "#8f2086",
+    color: "white",
+    margin: 5,
+  },
   state: {
     marginTop: 20,
     marginBottom: 20,
