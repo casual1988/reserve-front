@@ -5,11 +5,11 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
+import PermissionRoleComponent from "./PermissionRoleComponent";
 
 class RolePermissionsListComponent extends Component {
   constructor(props) {
@@ -60,29 +60,6 @@ class RolePermissionsListComponent extends Component {
     });
   };
 
-  handleChange = (role, permission) => {
-    if (this.hasPermission(role, permission)) {
-      RolesService.unassignPermission(role, permission).then(() => {
-        //this.loadPermissions();
-      });
-    } else {
-      RolesService.assignPermission(role, permission).then(() => {
-        //this.loadPermissions();
-      });
-    }
-  };
-
-  hasPermission(role, permission) {
-    if (role !== undefined && role.permissions !== undefined) {
-      for (var i = 0; i < role.permissions.length; i++) {
-        if (role.permissions[i].id === permission.id) return true;
-      }
-    } else {
-      console.log("user roles not available");
-    }
-    return false;
-  }
-
   manageRoles = () => {
     this.props.history.push("/manage-roles");
   };
@@ -127,11 +104,10 @@ class RolePermissionsListComponent extends Component {
                     </TableCell>
                     {this.state.roles.map((role) => (
                       <TableCell key={role.id} align="right">
-                        <Checkbox
-                          onChange={() => this.handleChange(role, permission)}
-                          checked={this.hasPermission(role, permission)}
-                          color="primary"
-                          inputProps={{ "aria-label": "secondary checkbox" }}
+                        <PermissionRoleComponent
+                          role={role}
+                          permission={permission}
+                          hasPermission={this.hasPermission}
                         />
                       </TableCell>
                     ))}
