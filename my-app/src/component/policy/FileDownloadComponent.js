@@ -6,6 +6,9 @@ import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
 import Typography from "@material-ui/core/Typography";
 import Moment from "moment";
+import { makeStyles } from "@material-ui/core/styles";
+import SaveIcon from "@material-ui/icons/Save";
+import Button from "@material-ui/core/Button";
 
 class FileDownloadComponent extends Component {
   constructor(props) {
@@ -111,14 +114,14 @@ class FileDownloadComponent extends Component {
               }}
             />
             {!this.state.loading && (
-              <div
-                className="btn btn-primary"
-                onClick={(e) => {
-                  this.downloadReport(e);
-                }}
+              <Button
+                variant="contained"
+                style={saveButton}
+                endIcon={<SaveIcon />}
+                onClick={() => this.downloadReport()}
               >
                 Generiši izvještaj
-              </div>
+              </Button>
             )}
             {this.state.loading && <CircularProgress />}
             {this.state.errMsg && <div>{this.state.errMsg}</div>}
@@ -135,8 +138,12 @@ const titleStyle = {
   marginBottom: 50,
 };
 
-const dateStyle = {
-  fontSize: "150%",
+const dateStyle = {};
+
+const saveButton = {
+  background: "#8f2086",
+  color: "white",
+  margin: 5,
 };
 
 export default FileDownloadComponent;
