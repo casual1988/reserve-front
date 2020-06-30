@@ -55,9 +55,10 @@ class EditUserRolesComponent extends Component {
   };
 
   deleteRole = () => {
-    RolesService.deleteRole(this.state.selectedRoleId).then(() =>
-      this.loadRoles()
-    );
+    RolesService.deleteRole(this.state.selectedRoleId).then(() => {
+      this.loadRoles();
+      this.setState({ showConfirmDeleteDialog: false });
+    });
   };
 
   loadRoles = () => {
