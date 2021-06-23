@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://localhost:8282";
 
 const ROLE_BASED_URL = API_BASE_URL + "/roles";
 const PERMISSION_BASED_URL = API_BASE_URL + "/permissions";

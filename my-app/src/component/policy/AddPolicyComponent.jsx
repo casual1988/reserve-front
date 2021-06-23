@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import NavBar from "../Navbar";
+import { TextareaAutosize } from "@material-ui/core";
 
 class AddPolicyComponent extends Component {
   constructor(props) {
@@ -19,12 +20,16 @@ class AddPolicyComponent extends Component {
       policyType: "",
       description: "",
       message: null,
+      policyNumberErrorText: null,
     };
     this.savePolicy = this.savePolicy.bind(this);
   }
 
   savePolicy = (e) => {
     e.preventDefault();
+    if (this.state.policyNumberErrorText) return;
+    if (!this.state.policyNumber || this.state.policyNumber.length == 0) return;
+
     let policy = {
       policyNumber: this.state.policyNumber,
       discount: this.state.discount,
@@ -42,6 +47,7 @@ class AddPolicyComponent extends Component {
   };
 
   onChange = (e) => {
+    let field = e.target.name;
     this.setState(
       {
         [e.target.name]: e.target.value,
@@ -55,8 +61,37 @@ class AddPolicyComponent extends Component {
               ),
             })
           : this.setState({ discountPercentage: 0 });
+        if (field === "policyNumber" || field === "policyType") {
+          this.validatePolicyNumber();
+        }
       }
     );
+  };
+
+  validatePolicyNumber = () => {
+    console.log("validate policy number");
+    let policyNumber = this.state.policyNumber;
+    let policyType = this.state.policyType;
+    console.log("policyNumber: " + policyNumber);
+    console.log("policyType: " + policyType);
+    if (!policyType || !policyType) {
+      console.log("policy number is valid locally");
+      this.setState({
+        policyNumberErrorText: null,
+      });
+    } else {
+      PolicyService.isValidPolicyNumber(policyNumber, policyType).then(
+        (response) => {
+          console.log(response);
+          console.log("valid: ispod");
+          console.log(response.data.result);
+          this.setState({
+            policyNumberErrorText:
+              response.data.result == true ? null : response.data.message,
+          });
+        }
+      );
+    }
   };
 
   render() {
@@ -75,6 +110,12 @@ class AddPolicyComponent extends Component {
               name="policyNumber"
               value={this.state.policyNumber}
               onChange={this.onChange}
+              onBlur={this.state.validatePolicyNumber}
+              helperText={this.state.policyNumberErrorText}
+              error={
+                this.state.policyNumberErrorText &&
+                this.state.policyNumberErrorText.length > 0
+              }
             />
 
             <TextField
@@ -136,6 +177,7 @@ class AddPolicyComponent extends Component {
               name="policyType"
               value={this.state.policyType}
               onChange={this.onChange}
+              onBlur={this.state.validatePolicyNumber}
             />
 
             <TextField
@@ -159,6 +201,7 @@ class AddPolicyComponent extends Component {
               variant="contained"
               style={styles.button}
               onClick={() => this.props.history.push("/list-policy")}
+              disabled={true}
             >
               Odustani
             </Button>

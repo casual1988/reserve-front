@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const USER_API_BASE_URL = "http://localhost:8080/users";
+const USER_API_BASE_URL = "http://localhost:8282/users";
 
 class UserService {
   fetchUsers() {
@@ -31,6 +31,7 @@ class UserService {
   }
 
   editUser(user) {
+    console.log(user);
     return axios.put(
       USER_API_BASE_URL + "/" + user.id,
       user,

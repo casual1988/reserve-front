@@ -1,8 +1,8 @@
 import axios from "axios";
 import AuthService from "./AuthService";
 
-const POLICY_API_BASE_URL = "http://localhost:8080/policies";
-const POLICY_REPORT_API_BASE_URL = "http://localhost:8080/report";
+const POLICY_API_BASE_URL = "http://localhost:8282/policies";
+const POLICY_REPORT_API_BASE_URL = "http://localhost:8282/report";
 
 class PolicyService {
   fetchPolicies() {
@@ -44,6 +44,14 @@ class PolicyService {
     return axios.put(
       POLICY_API_BASE_URL + "/" + policy.id,
       policy,
+      AuthService.getAuthHeader()
+    );
+  }
+
+  // validates policy number when new policy is created in form
+  isValidPolicyNumber(policyNumber, policyType){
+    return axios.get(
+      POLICY_API_BASE_URL + "/validate?policyNumber=" + policyNumber+"&policyType="+policyType,
       AuthService.getAuthHeader()
     );
   }

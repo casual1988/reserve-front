@@ -20,6 +20,7 @@ class EditPolicyComponent extends Component {
       policyType: "",
       description: "",
       message: null,
+      policyNumberErrorText: null,
     };
     this.savePolicy = this.savePolicy.bind(this);
     this.loadPolicy = this.loadPolicy.bind(this);
@@ -51,6 +52,7 @@ class EditPolicyComponent extends Component {
   }
 
   onChange = (e) => {
+    let field = e.target.name;
     this.setState({ [e.target.name]: e.target.value }, () => {
       const { price, discount } = this.state;
       price > 0 && discount > 0
@@ -60,11 +62,17 @@ class EditPolicyComponent extends Component {
             ),
           })
         : this.setState({ discountPercentage: 0 });
+      if (field === "policyNumber" || field === "policyType") {
+        this.validatePolicyNumber();
+      }
     });
   };
 
   savePolicy = (e) => {
     e.preventDefault();
+    if (this.state.policyNumberErrorText) return;
+    if (!this.state.policyNumber || this.state.policyNumber.length == 0) return;
+
     let policy = {
       id: this.state.id,
       policyNumber: this.state.policyNumber,
@@ -85,6 +93,32 @@ class EditPolicyComponent extends Component {
     });
   };
 
+  validatePolicyNumber = () => {
+    console.log("validate policy number");
+    let policyNumber = this.state.policyNumber;
+    let policyType = this.state.policyType;
+    console.log("policyNumber: " + policyNumber);
+    console.log("policyType: " + policyType);
+    if (!policyType || !policyType) {
+      console.log("policy number is valid locally");
+      this.setState({
+        policyNumberErrorText: null,
+      });
+    } else {
+      PolicyService.isValidPolicyNumber(policyNumber, policyType).then(
+        (response) => {
+          console.log(response);
+          console.log("valid: ispod");
+          console.log(response.data.result);
+          this.setState({
+            policyNumberErrorText:
+              response.data.result == true ? null : response.data.message,
+          });
+        }
+      );
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -101,6 +135,12 @@ class EditPolicyComponent extends Component {
               name="policyNumber"
               value={this.state.policyNumber}
               onChange={this.onChange}
+              onBlur={this.state.validatePolicyNumber}
+              helperText={this.state.policyNumberErrorText}
+              error={
+                this.state.policyNumberErrorText &&
+                this.state.policyNumberErrorText.length > 0
+              }
             />
 
             <TextField
@@ -162,6 +202,7 @@ class EditPolicyComponent extends Component {
               name="policyType"
               value={this.state.policyType}
               onChange={this.onChange}
+              onBlur={this.state.validatePolicyNumber}
             />
 
             <TextField
@@ -201,16 +242,16 @@ const style = {
 };
 
 const styles = {
-    center: {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: 10,
-    },
-    button: {
-      background: "#8f2086",
-      color: "white",
-      margin: 5,
-    },
-  };
+  center: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  button: {
+    background: "#8f2086",
+    color: "white",
+    margin: 5,
+  },
+};
 
 export default EditPolicyComponent;
