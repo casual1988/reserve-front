@@ -96,8 +96,8 @@ class AddPolicyComponent extends Component {
             error.response.status &&
             error.response.status === 401
           ) {
-            console.log("istekla sesija");
-            this.props.history.push("/login");
+            console.log("istekla sesija, redirect-am na /");
+            this.props.history.push("/");
           } else {
             console.log(error.response);
           }
@@ -116,6 +116,7 @@ class AddPolicyComponent extends Component {
           <form style={formContainer}>
             <TextField
               label="BROJ POLISE"
+              type="number"
               fullWidth
               margin="normal"
               name="policyNumber"
