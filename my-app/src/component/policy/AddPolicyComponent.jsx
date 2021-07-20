@@ -80,8 +80,8 @@ class AddPolicyComponent extends Component {
         policyNumberErrorText: null,
       });
     } else {
-      PolicyService.isValidPolicyNumber(policyNumber, policyType).then(
-        (response) => {
+      PolicyService.isValidPolicyNumber(policyNumber, policyType)
+        .then((response) => {
           console.log(response);
           console.log("valid: ispod");
           console.log(response.data.result);
@@ -89,8 +89,19 @@ class AddPolicyComponent extends Component {
             policyNumberErrorText:
               response.data.result == true ? null : response.data.message,
           });
-        }
-      );
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.status &&
+            error.response.status === 401
+          ) {
+            console.log("istekla sesija");
+            this.props.history.push("/login");
+          } else {
+            console.log(error.response);
+          }
+        });
     }
   };
 
